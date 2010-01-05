@@ -33,6 +33,9 @@ use warnings;
 }}
 
 use ExtUtils::MakeMaker;
+use File::ShareDir::Install;
+
+install_share '{{ $share_dir }}';
 
 WriteMakefile(
   DISTNAME  => '{{ $dist->name     }}',
@@ -96,6 +99,7 @@ sub setup_installer {
       exe_files   => \$exe_files,
       author_str  => \quotemeta( $self->zilla->authors->join(q{, }) ),
       test_dirs   => join (q{ }, sort keys %test_dirs),
+      share_dir   => \$share_dirs[0],
     },
   );
 
